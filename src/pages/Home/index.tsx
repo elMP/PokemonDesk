@@ -19,7 +19,7 @@ const HomePage = () => {
           </h1>
           <p>You can know the type of Pokemon, its strengths, disadvantages and abilities</p>
           <Button onClick={(event) => console.log('Click Button!')}>See pokemons</Button>
-          <Button onClick={(event) => console.log('Click Button!')} color="h1">
+          <Button onClick={(event) => console.log('Click Button!')} color="yellow" size="small" isMaxWidth>
             Yellow
           </Button>
           <Heading size="h1">Это большой текст</Heading>
