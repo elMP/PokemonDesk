@@ -18,6 +18,9 @@ const HomePage = () => {
           </h1>
           <p>You can know the type of Pokemon, its strengths, disadvantages and abilities</p>
           <Button onClick={(event) => console.log('Click Button!')}>See pokemons</Button>
+          <Button onClick={(event) => console.log('Click Button!')} color="yellow">
+            Yellow
+          </Button>
         </div>
         <div className={s.contentParallax}>
           <Parallax />
