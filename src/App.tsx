@@ -1,12 +1,14 @@
 /* eslint-disable */
 import React from 'react';
-import HomePage from './pages/Home';
+import { useRoutes } from 'hookrouter';
+import routes from './routes';
 
-import s from './App.module.scss';
+//import s from './App.module.scss';
+import NotFoundPage from './pages/NotFound';
 
 const App = () => {
-  console.log('Some log');
-  return <HomePage />;
+  const match = useRoutes(routes);
+  return match || <NotFoundPage />;
 };
 
 export default App;
