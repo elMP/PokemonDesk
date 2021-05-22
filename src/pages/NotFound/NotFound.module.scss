@@ -1,0 +1,23 @@
+@import '../../variables.scss';
+
+.root {
+  min-height: 100vh;
+  background: #d93e30;
+}
+.contentWrap {
+  text-align: center;
+}
+
+.contentText {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 700px;
+  line-height: 818px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 4px;
+}
+
+.layer {
+  color: green;
+}
