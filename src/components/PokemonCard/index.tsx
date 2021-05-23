@@ -3,7 +3,8 @@ import Heading from '../../Heading';
 
 import s from './PokemonCard.module.scss';
 
-interface IPokemon {
+export interface IPokemon {
+  key: string;
   name: string;
   img: string;
   stats: {
