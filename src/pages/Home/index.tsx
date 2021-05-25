@@ -13,7 +13,7 @@ import { LinkEnum } from '../../routes';
 const HomePage = () => {
   return (
     <div className={s.root}>
-      <Header />
+      {/* <Header /> */}
       <Layout className={s.contentWrap}>
         <div className={s.contentText}>
           <h1>
