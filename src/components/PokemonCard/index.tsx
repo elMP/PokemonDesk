@@ -3,15 +3,15 @@ import Heading from '../../Heading';
 
 import s from './PokemonCard.module.scss';
 
-export interface IPokemon {
-  key: string;
-  name: string;
-  img: string;
-  stats: {
-    attack: number;
-    defense: number;
-  };
-}
+// export interface IPokemon {
+//   key: string;
+//   name: string;
+//   img: string;
+//   stats: {
+//     attack: number;
+//     defense: number;
+//   };
+// }
 
 interface PokemonCardProps {
   pokemon: IPokemon;

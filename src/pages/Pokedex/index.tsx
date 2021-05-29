@@ -1,49 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import s from './PokedexPage.module.scss';
 import Layout from '../../components/Layout';
-import PokemonCard, { IPokemon } from '../../components/PokemonCard';
+import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../Heading';
-import req from '../../utils/request';
+import useData from '../../hook/getData';
 
-interface PokemonData {
-  total: string;
-  pokemons: Array<IPokemon>;
+import { IPokemon, PokemonsRequest } from '../../interface/pokemons';
+import useDebounce from '../../hook/useDebounce';
+//   total: string;
+//   pokemons: Array<IPokemon>;
+// }
+
+interface IQuery {
+  name?: string;
 }
 
-const usePokemons = () => {
-  const [data, setData] = useState<PokemonData>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
+const PokedexPage = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const [query, setQuery] = useState<IQuery>({});
 
-  useEffect(() => {
-    const getPokemons = async () => {
-      setIsLoading(true);
-      try {
-        const result = await req('getPokemons');
+  const debounceValue = useDebounce(searchValue, 1000);
+  // const query = useMemo(() => ({
+  //   name: searchValue
+  // }), [searchValue]);
 
-        setData(result);
-      } catch (e) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getPokemons();
-  }, []);
+  const { data, isLoading, isError } = useData<IPokemon>('getPokemons', query, [debounceValue]);
 
-  return {
-    data,
-    isLoading,
-    isError,
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+    setQuery((state: IQuery) => ({
+      ...state,
+      name: e.target.value,
+    }));
   };
-};
 
-const PokedexPage: React.FC = () => {
-  const { data, isLoading, isError } = usePokemons();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (isError) {
     return <div>Something wrong!</div>;
@@ -55,16 +48,19 @@ const PokedexPage: React.FC = () => {
   return (
     <div className={s.root}>
       {/* <Header /> */}
-      <Heading size="h4"> {data.total} Pokemons for you to choose your favorite</Heading>
       <Layout className={s.contentWrap}>
+        <Heading size="h4"> {!isLoading && data && data.total} Pokemons for you to choose your favorite</Heading>
+        <div>
+          <input type="text" value={searchValue} onChange={handleSearchChange} />
+        </div>
         {/* <div>
           {data.pokemons.map(item =>
             <div>{item.name}</div>)}
         </div> */}
         <div>
-          {data.pokemons.map((item: IPokemon) => (
-            <PokemonCard key={item.key} pokemon={item} />
-          ))}
+          {!isLoading &&
+            data &&
+            data.pokemons.map((item: PokemonsRequest) => <PokemonCard key={item.key} pokemon={item} />)}
           ;
         </div>
       </Layout>
