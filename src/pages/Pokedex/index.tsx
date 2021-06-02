@@ -60,7 +60,7 @@ const PokedexPage = () => {
         <div>
           {!isLoading &&
             data &&
-            data.pokemons.map((item: PokemonsRequest) => <PokemonCard key={item.key} pokemon={item} />)}
+            data.pokemons.map((item: PokemonsRequest) => <PokemonCard key={item.id} pokemon={item} />)}
           ;
         </div>
       </Layout>

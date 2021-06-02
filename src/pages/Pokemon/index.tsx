@@ -1,5 +1,5 @@
 import React from 'react';
-import { getOnePokemonData } from '../../hook/getData';
+import useData from '../../hook/getData';
 import { PokemonsRequest } from '../../interface/pokemons';
 
 export interface PokemonProps {
@@ -7,7 +7,11 @@ export interface PokemonProps {
 }
 
 const Pokemon: React.FC<PokemonProps> = ({ id }) => {
-  const { data } = getOnePokemonData<PokemonsRequest>('getPokemonById');
+  const { data, isLoading } = useData<PokemonsRequest>('getPokemon', { id });
+
+  if (isLoading) {
+    return <div>Loading....</div>;
+  }
 
   return <div>This is pokemon {data?.name};</div>;
 };

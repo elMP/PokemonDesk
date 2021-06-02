@@ -11,10 +11,28 @@ export const config = {
           pathname: '/api/v1/pokemons',
         },
       },
-      getPokemonById: {
+      getPokemon: {
         method: 'GET',
         uri: {
-          pathname: '/api/v1/pokemon/10',
+          pathname: '/api/v1/pokemon/{id}',
+        },
+      },
+      createPokemon: {
+        method: 'POST',
+        uri: {
+          pathname: '/api/v1/pokemon/create',
+        },
+      },
+      updatePokemon: {
+        method: 'PUT',
+        uri: {
+          pathname: '/api/v1/pokemon/{id}',
+        },
+      },
+      deletePokemon: {
+        method: 'DELETE',
+        uri: {
+          pathname: '/api/v1/pokemon/{id}/delete',
         },
       },
     },

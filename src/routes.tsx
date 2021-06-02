@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import HomePage from './pages/Home';
 import PokedexPage from './pages/Pokedex';
