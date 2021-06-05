@@ -15,8 +15,9 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     '@typescript-eslint/no-unused-vars': 'error',
-    'no-console': 'error',
+    'no-console': 1,
     'react/jsx-filename-extension': ['error', { extensions: ['.jsx', '.tsx', '.ts', '.js'] }],
+    'import/no-extraneous-dependencies': ['warn', { devDependencies: true }],
     'import/extensions': [
       'error',
       'ignorePackages',
