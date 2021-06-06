@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './PokedexPage.module.scss';
 import Layout from '../../components/Layout';
 import PokemonCard from '../../components/PokemonCard';
@@ -7,6 +8,8 @@ import useData from '../../hook/getData';
 
 import { IPokemon, PokemonsRequest } from '../../interface/pokemons';
 import useDebounce from '../../hook/useDebounce';
+
+import { getTypesAction, getPokemonsTypes, getPokemonsTypesLoading } from '../../store/pokemon';
 //   total: string;
 //   pokemons: Array<IPokemon>;
 // }
@@ -16,6 +19,12 @@ interface IQuery {
 }
 
 const PokedexPage = () => {
+  const dispatch = useDispatch();
+  const types = useSelector(getPokemonsTypes);
+  const isTypesLoading = useSelector(getPokemonsTypesLoading);
+
+  console.log('types', types);
+
   const [searchValue, setSearchValue] = useState('');
   const [query, setQuery] = useState<IQuery>({});
 
@@ -25,6 +34,10 @@ const PokedexPage = () => {
   // }), [searchValue]);
 
   const { data, isLoading, isError } = useData<IPokemon>('getPokemons', query, [debounceValue]);
+
+  useEffect(() => {
+    dispatch(getTypesAction());
+  }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -53,6 +66,7 @@ const PokedexPage = () => {
         <div>
           <input type="text" value={searchValue} onChange={handleSearchChange} />
         </div>
+        <div>{isTypesLoading ? <div>Loading...</div> : types?.map((item) => <div>{item}</div>)}</div>
         {/* <div>
           {data.pokemons.map(item =>
             <div>{item.name}</div>)}

@@ -17,6 +17,12 @@ export const config = {
           pathname: '/api/v1/pokemon/{id}',
         },
       },
+      getTypes: {
+        method: 'GET',
+        uri: {
+          pathname: '/api/v1/types',
+        },
+      },
       createPokemon: {
         method: 'POST',
         uri: {
